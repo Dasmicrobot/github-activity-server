@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  github-activity-server
+
+  Sample SAM Template for github-activity-server
+
+# SAM spec: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md
+# SAM is CF, therefore Cloud Formation spec: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+# SAM Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Runtime: nodejs10.x
+    Timeout: 3
+  Api:
+    EndpointConfiguration: EDGE
+    Cors: "'commits.dasmicrobot.com'"
+
+Resources:
+  OauthGithubAuthorizeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: oauth/
+      Handler: githubAuthorization.handler
+      Events:
+        Gateway:
+          Type: Api
+          Properties:
+            Path: /oauth/github/login
+            Method: get
+  OauthGithubCallbackFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: oauth/
+      Handler: githubAuthorizationCallback.handler
+      Events:
+        Gateway:
+          Type: Api
+          Properties:
+            Path: /oauth/github/login/callback
+            Method: get
+
+Outputs:
+  # here /Prod refers to implicitly created Prod stage
+  ApiUrl:
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  OauthGithubAuthorizeFunction:
+    Value: !GetAtt OauthGithubAuthorizeFunction.Arn
+  OauthGithubCallbackFunction:
+    Value: !GetAtt OauthGithubCallbackFunction.Arn
