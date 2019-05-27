@@ -1,5 +1,9 @@
 # github-activity-server
 
+[![Build Status](https://travis-ci.org/Dasmicrobot/github-activity-server.svg?branch=master)](https://travis-ci.org/Dasmicrobot/github-activity-server)
+[![GitHub issues](https://img.shields.io/github/issues/Dasmicrobot/github-activity-server.svg)](https://github.com/Dasmicrobot/github-activity-server/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Dasmicrobot/github-activity-server.svg)](https://github.com/Dasmicrobot/github-activity-server/commits/master)
+
 ## Requirements
 
 * AWS CLI already configured with Administrator permission
