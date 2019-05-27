@@ -16,6 +16,18 @@ Globals:
     EndpointConfiguration: EDGE
     Cors: "'*'"
 
+Parameters:
+  GithubClientId:
+    Type: String
+    Description: Github issued OAuth client ID
+  GithubClientSecret:
+    Type: String
+    NoEcho: true
+    Description: Github issued OAuth client secret
+  GithubOatuhCallbackUrl:
+    Type: String
+    Description: Access token will be appended as parameter after which redirect will follow to this URL
+
 Resources:
   OauthGithubAuthorizeFunction:
     Type: AWS::Serverless::Function
@@ -28,6 +40,9 @@ Resources:
           Properties:
             Path: /oauth/github/login
             Method: get
+      Environment:
+        Variables:
+          CLIENT_ID: !Ref GithubClientId
   OauthGithubCallbackFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -39,6 +54,11 @@ Resources:
           Properties:
             Path: /oauth/github/login/callback
             Method: get
+      Environment:
+        Variables:
+          CLIENT_ID: !Ref GithubClientId
+          CLIENT_SECRET: !Ref GithubClientSecret
+          OAUTH_CALLBACK_URL: !Ref GithubOatuhCallbackUrl
 
 Outputs:
   # here /Prod refers to implicitly created Prod stage

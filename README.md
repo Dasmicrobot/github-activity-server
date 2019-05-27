@@ -13,7 +13,7 @@
 **Invoking function locally using a local sample payload**
 
 ```bash
-sam local invoke HelloWorldFunction --event event.json
+sam local invoke --no-event OauthGithubAuthorizeFunction --parameter-overrides ParameterKey=GithubClientId,ParameterValue=foobar
 ```
  
 **Invoking function locally through local API Gateway**
