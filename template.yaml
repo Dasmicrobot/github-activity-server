@@ -14,7 +14,7 @@ Globals:
     Timeout: 3
   Api:
     EndpointConfiguration: EDGE
-    Cors: "'commits.dasmicrobot.com'"
+    Cors: "'*'"
 
 Resources:
   OauthGithubAuthorizeFunction:
