@@ -1,23 +1,27 @@
 language: python
 python:
-  - "3.5"
+- '3.5'
 env:
   global:
-    - AWS_DEFAULT_REGION=eu-west-1
-    - LAMBDA_S3_BUCKET_NAME=github-activity-lambda
-    - GITHUB_OAUTH_CALLBACK_URL=https://commits.dasmicrobot.com/callback_github.html
-    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+  - AWS_DEFAULT_REGION=eu-west-1
+  - LAMBDA_S3_BUCKET_NAME=github-activity-lambda
+  - GITHUB_OAUTH_CALLBACK_URL=https://commits.dasmicrobot.com/callback_github.html
+  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+  - secure: Bqb3n3Jh2XSAagI/RPLAk866pS9hBAP5nnDqbQVS4vyWhV6+0DGbf+iSwo21HmA3/Mpv1n+8dZnZ8g3YA4nRzqRg205vZ5WAVaFZH9GunMML/mef5zReL198YJWU3FuFiTkAKThQcStmnrR0htp3sBLosjudvlIiDyCkS+EQlR2MzPj131QufZom1hphTYZKMeFL/dh3v9KfB0RxMsbZMeYLq9A89QSeFY0XLgGGys5xqLnoJoTIYoC9Ve+V/VcaCs8a84DfbLNjWjHyvO5Ean7mencaPIj99zpz7xZ4PADhz4A0LLWvlmxAYKcfDEz5YzChz0FIHi2lykPYdXdEMR5G9f5LDt4iobVMrPfbk35OiOdGOzIihGau7BkYodPOG3tSXJlJsLGFvrNsC2eNcawp6OhTOsOdto2jISIwv/XF2wnfv6wOZHuv3RGVBOzbEnB7eQ6lykrqPal0iMMks6ZsdHqXWd1GQ3gRYj7/LhEDRralpU1JRDdeP147ENLXldYjiFzYKv4z/mEGfJdw8vgdvwZ/8/tHX2mDJwJFwvZeap0iw/VTs3WrxG/3Aj8ixr4DFLHAUi3IOyQjCoMfMDDu4tVc6v+JAITiLSDmtCGCxdy4I/xg+Tbm7QjYlxEHhT8b63UHmlU4Xu8CwU5pV4IPnoBmQ4sknr1UKKfc1g0=
+  - secure: SG/1psebuqm6DpaowHd8n8rv1RAfn6gVNinJk+US4j+o24AU8oLSJmZtDJ2l93867XH+OggSixR6GL/soUbi/6o2wvfOaJk5NZWamp3kvq1kL4Yu3KVEyVu1/vGeJIghs4R6EnFyzdJOB9pzn5YSRE7hiPeMYikpsFNA4tYCGcaEfVv/M4+n4TPIIS6wTHtWe4jfM4jwYv3oC+G/J9NbfpcAedP2/rvNf3pa8INqyHRcz0UkTw2cmsAtB5m8VmCiWImenhLZB/BUq75xSQjh4k2VoNG1j1ZPVs416BLl5L4+PXBrW1VlD6wAYIRCmR/L0JRc6NodtzcegEZZl/oUrEL9ul1QlX2g7Xw6ElJKxVohmv8GoOB+8p8/jrQ5fQakB/FWLjJD/e0LHWC/VWH9fXBei0DQN3Fxf8Dh1CwClrAuE2zt1HZn7C7v9x/0ka899cxAcqj/OAoa2xjO5N3cQfvtb7stISShhgZ+78dVjfVTLYm6MqXZd5DiRfjdt5grKts1D6mAeHWk8TR37C/J68VFArfb2CA1o5rU/Pc52lGewrb3tkuRtEI90PhhNP7h3R1ofgO0g4skqh9sBkxToQgNNpW/nzs7zcyu5jwc89N/NSlYWbPViF99HBxT0A0XEezDTlDXA1LS9rBFmHfy0wIh5X+DUSa+GwkUKKh56EA=
+  - secure: fykrugUizl94nDstkqUb2fabf/J822rcKoLIB7Hu7D0GeLWur3H1JjNX1+90KRNEjjYRjz6LG7AioHmgZiohJNpEH/HXzxckzi3zcjEwlelzYN/29zkANMQJ+2aLpv7wRebagrx9ZMi24ehOBcKzMiZDXoHK/yzFBmy098DvRmd0rnevEsoqhBIChcYSTPkOpGxUkgdJRkannV/6e8fJlhwwKhyIBtILi9QV29F2NIVGseX2krm5fF2aiwf8+mrJlg1C+sJrsXKdc5TS6myod6Pl4ZwIFvHZCtfvZN20Axd50JPzsxKtW1BtNV4jVIwV1rZ6osoIZFuZ+J4obVZMlRNAKvDoW/7ycegXxigR0ejoyxYlG0SR7bvh5LVPkYxdJWvM7DMEZW/b5OlXA/yRCupzs+wWvqq9M0m0rlNs0t0uSsC0FhBo5GYespnYv6XikgjIRWEKHafiWACOA9FL9jxaN7/WWvnS8RzBjnSva4WWmMCsJ8/V8oT6M7VPUr1J+jRf/TG9MayqfnwGnQSHVOICsSG49vRKO7c0vgL11q8XlvpbLgLz9d+Sk8pAUOzsn8LQKhsVqXkiOPx489+b7gbcJKYvFbRYLMiEvybJvr01SOIF68ehYSF78aT1G+LJh0tMtcoMPLh/qKrkDaOdli7oGgl3ixMypP0GxdwlNjM=
+  - secure: U7cxO7qxIkA/5fUwemAEr4Al5Q0/m3Rogq24M3DG1ADy4ayO90SGPV/YP8aLvdnhTGsnwLSs0HevJQaDz0B7h0SiFEa3bsOsJj4U5PXImXWePWKS6dDepgme4EN3kfrnrHfXaYupRDMKv1pkdJHsKqR5e6GykFqR0FYxUaOQjl//x3mVY3RlbvFEmYgXs6/8uS5ZeYI+9OPA9C0H0VU55om1h/nyebicUmpSTeEg+krdHielqxtla+Ni2r80YACSpf5NHcHf5XbaW+KzhKjw05uOwYxf0HlZ5EvMjhUJgjXSDFViideLCDEnlKMOXPYkpWYyImele8biF+GPVbKcr57eHGrp+OxoMJulHNIyPZRlHKYWxf8fquKqL2BQz3jNHp4Hv4o2IJB3oZLPEGEs8H3PkU3dQ5FDGsDPYtdHh4mr4QWRyc1HbvviFHcQDZMV2XDhP93o7QGo8HYMvnrQjxi4pGcZj5TWh3LgBe070V+klHR1Czkk1QT1gSEY2+xVNWnp2G9Zf2pgUs94sxkP+B+g7xKJo0wPe6Zrc3NhlPTopGjlGLFM5TNjLB4Sk8WOKnvMsYl4GgmzKSLKqJ8KeSVfJy8wp1zNqag5aNs1JLHRP8kUKMrTSGht77UkQ3m8WyYo2kqOG/rFB0drre0E9aSyUBrO6jZpva4v8Aj5peo=
 install:
-  - python --version
-  - pip --version
-  - pip install awscli aws-sam-cli
-  - export PATH=$PATH:$HOME/.local/bin
+- python --version
+- pip --version
+- pip install awscli aws-sam-cli
+- export PATH=$PATH:$HOME/.local/bin
 script:
-  - sam validate
+- sam validate
 deploy:
-  - provider: script
-    skip_cleanup: true
-    script: bash deploy.sh
-    on:
-      branch: master
-      condition: $TRAVIS_PULL_REQUEST = false
+- provider: script
+  skip_cleanup: true
+  script: bash deploy.sh
+  on:
+    branch: master
+    condition: "$TRAVIS_PULL_REQUEST = false"
