@@ -24,7 +24,7 @@ Parameters:
     Type: String
     NoEcho: true
     Description: Github issued OAuth client secret
-  GithubOatuhCallbackUrl:
+  GithubOauthCallbackUrl:
     Type: String
     Description: Access token will be appended as parameter after which redirect will follow to this URL
 
@@ -58,7 +58,7 @@ Resources:
         Variables:
           CLIENT_ID: !Ref GithubClientId
           CLIENT_SECRET: !Ref GithubClientSecret
-          OAUTH_CALLBACK_URL: !Ref GithubOatuhCallbackUrl
+          OAUTH_CALLBACK_URL: !Ref GithubOauthCallbackUrl
 
 Outputs:
   # here /Prod refers to implicitly created Prod stage
