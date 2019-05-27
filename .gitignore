@@ -1,5 +1,7 @@
 *.iml
 
+packaged.yaml
+
 # Created by https://www.gitignore.io/api/osx,node,linux,windows
 
 ### Linux ###
