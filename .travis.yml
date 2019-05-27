@@ -1,6 +1,6 @@
 language: python
 python:
-- '2.7'
+- '3.7'
 env:
   global:
   - AWS_DEFAULT_REGION=eu-west-1
