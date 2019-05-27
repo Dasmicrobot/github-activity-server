@@ -1,0 +1,23 @@
+language: python
+python:
+  - "3.5"
+env:
+  global:
+    - AWS_DEFAULT_REGION=eu-west-1
+    - LAMBDA_S3_BUCKET_NAME=github-activity-lambda
+    - GITHUB_OAUTH_CALLBACK_URL=https://commits.dasmicrobot.com/callback_github.html
+    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+install:
+  - python --version
+  - pip --version
+  - pip install awscli aws-sam-cli
+  - export PATH=$PATH:$HOME/.local/bin
+script:
+  - sam validate
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: bash deploy.sh
+    on:
+      branch: master
+      condition: $TRAVIS_PULL_REQUEST = false
