@@ -19,7 +19,7 @@ sam local invoke --no-event OauthGithubAuthorizeFunction --parameter-overrides P
 **Invoking function locally through local API Gateway**
 
 ```bash
-sam local start-api
+sam local start-api --parameter-overrides 'ParameterKey=GithubClientId,ParameterValue=XXXXXXX ParameterKey=GithubClientSecret,ParameterValue=XXXXXXX ParameterKey=GithubOatuhCallbackUrl,ParameterValue=http://127.0.0.1:8080/callback.html'
 ```
 
 If the previous command ran successfully you should now be able to hit the following local endpoint to invoke your function `http://localhost:3000/$FunctionPath`
