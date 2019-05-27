@@ -1,21 +1,21 @@
-const { generateErrorObject } = require('../lib/error')
+const { generateErrorObject } = require('./error')
 const baseUrl = 'https://github.com'
 const authorizePath = '/login/oauth/authorize'
 const scope = 'user:email,read:org'
 const allowSignup = 'false'
-let authorizationUrl = `${baseUrl}${authorizePath}?client_id=${process.env.CLIENT_ID}&scope=${scope}&allow_signup=${allowSignup}`
+const authorizationUrl = `${baseUrl}${authorizePath}?client_id=${process.env.CLIENT_ID}&scope=${scope}&allow_signup=${allowSignup}`
 
-exports.handler = async(event, context) => {
+exports.handler = async (event, context) => {
 
-    if (!process.env.CLIENT_ID) {
-        return generateErrorObject("CLIENT_ID is not set in environment")
-    }
+  if (!process.env.CLIENT_ID) {
+    return generateErrorObject('CLIENT_ID is not set in environment')
+  }
 
-    return {
-        statusCode: 302,
-        headers: {
-            Location: authorizationUrl
-        },
-        body: null
-    }
-};
+  return {
+    statusCode: 302,
+    headers: {
+      Location: authorizationUrl
+    },
+    body: null
+  }
+}
