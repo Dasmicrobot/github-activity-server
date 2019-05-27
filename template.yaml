@@ -14,7 +14,6 @@ Globals:
     Timeout: 3
   Api:
     EndpointConfiguration: EDGE
-    Cors: "'*'"
 
 Parameters:
   GithubClientId:
