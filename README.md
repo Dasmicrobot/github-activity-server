@@ -1,6 +1,6 @@
 # github-activity-server
 
-[![Build Status](https://travis-ci.org/Dasmicrobot/github-activity-server.svg?branch=master)](https://travis-ci.org/Dasmicrobot/github-activity-server)
+[![Tests](https://github.com/Dasmicrobot/github-activity-server/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/Dasmicrobot/github-activity-server/actions/workflows/test.yml)
 [![GitHub issues](https://img.shields.io/github/issues/Dasmicrobot/github-activity-server.svg)](https://github.com/Dasmicrobot/github-activity-server/issues)
 [![GitHub last commit](https://img.shields.io/github/last-commit/Dasmicrobot/github-activity-server.svg)](https://github.com/Dasmicrobot/github-activity-server/commits/master)
 
