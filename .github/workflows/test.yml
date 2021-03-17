@@ -15,3 +15,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install aws-sam-cli
       - run: sam validate
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_ACCESS_KEY_SECRET }}
