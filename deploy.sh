@@ -14,4 +14,4 @@ sam package --output-template-file packaged.yaml --s3-bucket ${BUCKET_NAME}
 sam deploy --template-file packaged.yaml \
         --stack-name github-activity-server \
         --capabilities CAPABILITY_IAM \
-        --parameter-overrides 'GithubClientId=${CLIENT_ID} GithubClientSecret=${CLIENT_SECRET} GithubOauthCallbackUrl=${CALLBACK}'
+        --parameter-overrides "GithubClientId=${CLIENT_ID} GithubClientSecret=${CLIENT_SECRET} GithubOauthCallbackUrl=${CALLBACK}"
