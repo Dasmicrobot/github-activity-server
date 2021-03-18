@@ -75,6 +75,7 @@ exports.handler = async (event) => {
   }
 
   if (!response || !response.access_token) {
+    console.log('response', response)
     return generateErrorObject('did not receive expected [access_token]')
   }
 
