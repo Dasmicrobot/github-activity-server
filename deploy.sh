@@ -14,4 +14,4 @@ sam package --output-template-file packaged.yaml --s3-bucket ${LAMBDA_S3_BUCKET_
 sam deploy --template-file packaged.yaml \
         --stack-name github-activity-server \
         --capabilities CAPABILITY_IAM \
-        --parameter-overrides GithubClientId=${GITHUB_OAUTH_CLIENT_ID} GithubClientSecret=foobar GithubOauthCallbackUrl=${GITHUB_OAUTH_CALLBACK_URL}
+        --parameter-overrides GithubClientId=${GITHUB_OAUTH_CLIENT_ID} GithubClientSecret=${GITHUB_OAUTH_CLIENT_SECRET} GithubOauthCallbackUrl=${GITHUB_OAUTH_CALLBACK_URL}
