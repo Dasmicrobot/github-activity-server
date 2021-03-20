@@ -31,7 +31,7 @@ Resources:
   OauthGithubAuthorizeFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: oauth/
+      CodeUri: api/
       Handler: githubAuthorization.handler
       Events:
         Gateway:
@@ -45,7 +45,7 @@ Resources:
   OauthGithubCallbackFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: oauth/
+      CodeUri: api/
       Handler: githubAuthorizationCallback.handler
       Events:
         Gateway:
