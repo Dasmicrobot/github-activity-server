@@ -20,7 +20,7 @@
 **Start a local server (similar to API Gateway in production)**
 
 ```bash
-sam local start-api --port 8080 --env-vars env.local.json
+sam local start-api --port 8080 --env-vars env.example.json
 ```
 
 If the previous command ran successfully you should now be able to hit the following 
@@ -29,7 +29,7 @@ local endpoint to invoke your function `http://localhost:8080/oauth/github/login
 **Invoke a separate function locally using a sample event payload**
 
 ```bash
-sam local invoke --no-event OauthGithubAuthorizeFunction --env-vars env.local.json
+sam local invoke --no-event OauthGithubAuthorizeFunction --env-vars env.example.json
 ```
 
 ## Packaging and deployment
