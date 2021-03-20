@@ -3,7 +3,7 @@
  */
 
 const { generateErrorObject } = require('./error')
-const https = require('https')
+const { asyncHttpsRequest } = require('./request')
 const { URL } = require('url')
 
 function extractCode (event) {
@@ -17,34 +17,7 @@ async function exchangeCodeForToken (code) {
   api.searchParams.set('client_secret', process.env.CLIENT_SECRET)
   api.searchParams.set('code', code)
 
-  return asyncHttpsPostRequest(api)
-}
-
-async function asyncHttpsPostRequest (url) {
-  return new Promise(function (resolve, reject) {
-    https.request({
-      method: 'POST',
-      host: url.host,
-      path: url.pathname + url.search,
-      headers: {
-        'Accept': 'application/json'
-      }
-    }, (resp) => {
-      let data = ''
-      resp.on('data', (chunk) => {
-        data += chunk
-      })
-      resp.on('end', () => {
-        try {
-          let parsed = JSON.parse(data)
-          resolve(parsed)
-        } catch (e) {
-          reject(data)
-        }
-      })
-    }).on('error', reject)
-      .end()
-  })
+  return asyncHttpsRequest(api, 'POST')
 }
 
 exports.handler = async (event) => {
