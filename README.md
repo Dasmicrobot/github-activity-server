@@ -7,46 +7,46 @@
 
 ## Requirements
 
-* AWS CLI already configured with Administrator permission
-* [NodeJS 14+ installed](https://nodejs.org/en/download/releases/)
 * [Docker installed](https://www.docker.com/community-edition)
+* [SAM CLI installed](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
 
-## Setup process
+**For production**
+* AWS CLI configured with appropriate permissions, 
+  e.g. allow the following in an IAM policy 
+  `lambda:*, iam:*, cloudformation:*, apigateway:*, s3:*`
 
-### Local development
+## Local development
 
-**Invoking function locally using a local sample payload**
-
-```bash
-sam local invoke --no-event OauthGithubAuthorizeFunction --parameter-overrides ParameterKey=GithubClientId,ParameterValue=foobar
-```
- 
-**Invoking function locally through local API Gateway**
+**Start a local server (similar to API Gateway in production)**
 
 ```bash
-sam local start-api --parameter-overrides 'ParameterKey=GithubClientId,ParameterValue=XXXXXXX ParameterKey=GithubClientSecret,ParameterValue=XXXXXXX ParameterKey=GithubOatuhCallbackUrl,ParameterValue=http://127.0.0.1:8080/callback.html'
+sam local start-api --port 8080 --env-vars env.local.json
 ```
 
-If the previous command ran successfully you should now be able to hit the following local endpoint to invoke your function `http://localhost:3000/$FunctionPath`
+If the previous command ran successfully you should now be able to hit the following 
+local endpoint to invoke your function `http://localhost:8080/oauth/github/login/callback`
+
+**Invoke a separate function locally using a sample event payload**
+
+```bash
+sam local invoke --no-event OauthGithubAuthorizeFunction --env-vars env.local.json
+```
 
 ## Packaging and deployment
 
+See script [deploy.sh](./deploy.sh)
 
-Create `S3 bucket`:
+- Create a `S3 bucket` to store the packaged lambda functions:
 ```bash
 aws s3 mb s3://BUCKET_NAME
 ```
-
-Package Lambda (uploads to S3):
-
+- Package Lambda functions (uploads to S3):
 ```bash
 sam package \
     --output-template-file packaged.yaml \
     --s3-bucket BUCKET_NAME
 ```
-
-Create Cloudformation Stack and deploy your SAM resources.
-
+- Create Cloudformation Stack and deploy packaged resources.
 ```bash
 sam deploy \
     --template-file packaged.yaml \
@@ -72,7 +72,7 @@ sam logs -n OauthGithubAuthorizeFunction --stack-name github-activity-server --t
 
 ## Cleanup
 
-In order to delete our Serverless Application recently deployed you can use the following AWS CLI Command:
+In order to delete the deployed Serverless Application you can use the following AWS CLI Command:
 
 ```bash
 aws cloudformation delete-stack --stack-name github-activity-server
