@@ -76,6 +76,21 @@ Resources:
               - method.request.querystring.organisation:
                   Required: true
                   Caching: false
+  ApiOrganisationsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: api/
+      Handler: organisations.handler
+      Events:
+        Gateway:
+          Type: Api
+          Properties:
+            Path: /github/organisations
+            Method: get
+            RequestParameters:
+              - method.request.header.X-Github-Token:
+                  Required: true
+                  Caching: false
 
 Outputs:
   # here /Prod refers to implicitly created Prod stage
