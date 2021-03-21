@@ -15,6 +15,15 @@
   e.g. allow the following in an IAM policy 
   `lambda:*, iam:*, cloudformation:*, apigateway:*, s3:*`
 
+## API
+
+Production url: https://api.app.gitactivity.com
+
+| Path | Headers | Query params |
+| ---- | ------- | ------------ |
+| `/github/organisations` | `X-Github-Token` (required) | |
+| `/github/repositories` | `X-Github-Token` (required) | `organisation` (required) |
+
 ## Local development
 
 **Start a local server (similar to API Gateway in production)**
