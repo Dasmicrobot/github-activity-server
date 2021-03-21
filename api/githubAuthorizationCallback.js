@@ -2,6 +2,7 @@
  * https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/
  */
 
+const { constants } = require('./constants')
 const { generateErrorObject } = require('./error')
 const { asyncHttpsRequest } = require('./request')
 const { URL } = require('url')
@@ -55,7 +56,7 @@ exports.handler = async (event) => {
   return {
     statusCode: 302,
     headers: {
-      Location: process.env.OAUTH_CALLBACK_URL + '?access_token=' + response.access_token
+      Location: `${process.env.OAUTH_CALLBACK_URL}?${constants.authRedirectTokenParam}=${response.access_token}`
     },
     body: null
   }

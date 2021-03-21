@@ -1,4 +1,5 @@
 const https = require('https')
+const { constants } = require('./constants')
 
 exports.asyncHttpsRequest = async function asyncHttpsRequest (url, method, headers = {}) {
   return new Promise(function (resolve, reject) {
@@ -6,7 +7,10 @@ exports.asyncHttpsRequest = async function asyncHttpsRequest (url, method, heade
       method: method,
       host: url.host,
       path: url.pathname + url.search,
-      headers: { 'Accept': 'application/json', ...headers}
+      headers: {
+        'Accept': 'application/json',
+        'User-Agent': constants.uaString,
+        ...headers}
     }, (resp) => {
       let data = ''
       resp.on('data', (chunk) => {

@@ -1,18 +1,27 @@
+const { constants } = require('./constants')
 const { asyncHttpsRequest } = require('./request')
 const { generateErrorObject } = require('./error')
 
+/**
+ * @see https://docs.github.com/en/rest/reference/repos
+ * @param token Github token
+ * @param orgName Github organisation name
+ * @returns {Promise<[]>}
+ */
 async function listRepositories (token, orgName) {
   let repos = [];
   let hasNext = true;
   let pageNumber = 1;
   const itemsPerPage = 100;
-  const apiUrl = new URL(`/orgs/${orgName}/repos`, 'https://api.github.com')
+  const apiUrl = new URL(`/orgs/${orgName}/repos`, constants.githubApiBaseUrl)
   do {
-    apiUrl.searchParams.set('access_token', `${token}`)
+    apiUrl.searchParams.set(constants.githubAccessTokenParam, `${token}`)
     apiUrl.searchParams.set('page', `${pageNumber}`)
     apiUrl.searchParams.set('per_page', `${itemsPerPage}`)
-    const response = await asyncHttpsRequest(apiUrl, 'GET', { 'User-Agent': 'GitActivity 1.0' });
-    if (response && Array.isArray(response) && response.length > 0) {
+    const response = await asyncHttpsRequest(apiUrl, 'GET', {
+      Accept: constants.acceptGithubVndJson
+    });
+    if (Array.isArray(response) && response.length > 0) {
       repos = [...repos, ...response];
       pageNumber += 1;
     } else {
@@ -41,7 +50,7 @@ exports.handler = async (event, context) => {
     return generateErrorObject('Failed to list repositories')
   }
 
-  if (!repos || !Array.isArray(repos)) {
+  if (!Array.isArray(repos)) {
     return generateErrorObject('did not find anything')
   }
 
