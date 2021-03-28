@@ -18,7 +18,6 @@ Globals:
       AllowMethods: "'GET'"
       AllowHeaders: "'*'"
       AllowOrigin: "'*'"
-      AllowCredentials: True
 
 Parameters:
   GithubClientId:
