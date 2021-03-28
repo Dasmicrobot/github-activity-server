@@ -33,9 +33,9 @@ async function listRepositories (token, orgName) {
 }
 
 exports.handler = async (event, context) => {
-  const githubToken = event.headers['X-Github-Token'] || '';
+  const githubToken = event.headers[constants.headerGithubToken] || '';
   if (!githubToken) {
-    return generateErrorObject('X-Github-Token header is missing')
+    return generateErrorObject(`${constants.headerGithubToken} header is missing`)
   }
   const organisation = (event.queryStringParameters && event.queryStringParameters.organisation) || '';
   if (!organisation) {
