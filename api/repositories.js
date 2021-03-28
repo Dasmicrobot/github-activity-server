@@ -15,14 +15,14 @@ async function listRepositories (token, orgName) {
   const itemsPerPage = 100;
   const apiUrl = new URL(`/orgs/${orgName}/repos`, constants.githubApiBaseUrl)
   do {
-    apiUrl.searchParams.set(constants.githubAccessTokenParam, `${token}`)
     apiUrl.searchParams.set('page', `${pageNumber}`)
     apiUrl.searchParams.set('per_page', `${itemsPerPage}`)
-    const response = await asyncHttpsRequest(apiUrl, 'GET', {
-      Accept: constants.acceptGithubVndJson
+    const { data } = await asyncHttpsRequest(apiUrl, 'GET', {
+      Accept: constants.acceptGithubVndJson,
+      Authorization: `token ${token}`
     });
-    if (Array.isArray(response) && response.length > 0) {
-      repos = [...repos, ...response];
+    if (Array.isArray(data) && data.length > 0) {
+      repos = [...repos, ...data];
       pageNumber += 1;
     } else {
       hasNext = false;

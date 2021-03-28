@@ -45,18 +45,19 @@ exports.handler = async (event) => {
   try {
     response = await exchangeCodeForToken(code)
   } catch (e) {
+    console.error('response', response)
     return generateErrorObject('Failed to exchange code for access_token')
   }
 
-  if (!response || !response.access_token) {
-    console.log('response', response)
+  if (!response || !response.data.access_token) {
+    console.error('response', response)
     return generateErrorObject('did not receive expected [access_token]')
   }
 
   return {
     statusCode: 302,
     headers: {
-      Location: `${process.env.OAUTH_CALLBACK_URL}?${constants.authRedirectTokenParam}=${response.access_token}`
+      Location: `${process.env.OAUTH_CALLBACK_URL}?${constants.authRedirectTokenParam}=${response.data.access_token}`
     },
     body: null
   }

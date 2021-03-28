@@ -13,23 +13,27 @@ async function listOrganisations (token) {
   let hasNext = true;
   let idSince = null;
   const itemsPerPage = 100;
-  const apiUrl = new URL(`/organizations`, constants.githubApiBaseUrl)
+  const apiUrl = new URL(`/user/orgs`, constants.githubApiBaseUrl)
   do {
     if (numberOfApiCalls > 20) {
       throw new Error("Highly likely there is an infinite loop here");
     }
     numberOfApiCalls++;
-    apiUrl.searchParams.set(constants.githubAccessTokenParam, `${token}`)
     apiUrl.searchParams.set('per_page', `${itemsPerPage}`)
     if (idSince) {
       apiUrl.searchParams.set('since', `${idSince}`)
     }
-    const response = await asyncHttpsRequest(apiUrl, 'GET', {
-      Accept: constants.acceptGithubVndJson
+    const { data } = await asyncHttpsRequest(apiUrl, 'GET', {
+      Accept: constants.acceptGithubVndJson,
+      Authorization: `token ${token}`
     });
-    if (Array.isArray(response) && response.length > 0) {
-      organisations = [...organisations, ...response];
-      idSince = response[response.length - 1].id
+    if (Array.isArray(data) && data.length > 0) {
+      organisations = [...organisations, ...data];
+      idSince = data[data.length - 1].id
+      if (data.length < itemsPerPage) {
+        hasNext = false;
+        idSince = null;
+      }
     } else {
       hasNext = false;
     }
@@ -48,7 +52,6 @@ exports.handler = async (event, context) => {
   try {
     organisations = await listOrganisations(githubToken)
   } catch (e) {
-    console.log(e)
     return generateErrorObject('Failed to list organisations')
   }
 

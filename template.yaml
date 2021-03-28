@@ -11,7 +11,7 @@ Description: >
 Globals:
   Function:
     Runtime: nodejs14.x
-    Timeout: 3
+    Timeout: 5
   Api:
     EndpointConfiguration: EDGE
     Cors:

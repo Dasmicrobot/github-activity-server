@@ -10,18 +10,29 @@ exports.asyncHttpsRequest = async function asyncHttpsRequest (url, method, heade
       headers: {
         'Accept': 'application/json',
         'User-Agent': constants.uaString,
-        ...headers}
+        ...headers
+      }
     }, (resp) => {
       let data = ''
+      let responseObj = {
+        status: resp.statusCode,
+        headers: resp.headers,
+        data: null
+      }
       resp.on('data', (chunk) => {
         data += chunk
       })
       resp.on('end', () => {
         try {
-          let parsed = JSON.parse(data)
-          resolve(parsed)
+          responseObj.data = JSON.parse(data)
+          if (resp.statusCode >= 200 && resp.statusCode < 300) {
+            resolve(responseObj)
+          } else {
+            reject(responseObj)
+          }
         } catch (e) {
-          reject(data)
+          responseObj.data = data
+          reject(responseObj)
         }
       })
     }).on('error', reject)
