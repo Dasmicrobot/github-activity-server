@@ -1,3 +1,5 @@
+const { constants } = require('./constants')
+
 exports.generateErrorObject = (message) => {
   return {
     statusCode: 400,
@@ -5,7 +7,8 @@ exports.generateErrorObject = (message) => {
       error: message
     }),
     headers: {
-      'Content-Type': 'application/json'
+      ...constants.commonResponseHeaders,
+      ...constants.corsHeaders
     }
   }
 }

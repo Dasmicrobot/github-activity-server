@@ -1,5 +1,5 @@
 const { constants } = require('./constants')
-const { asyncHttpsRequest } = require('./request')
+const { asyncHttpsRequest, findHeaderKey } = require('./request')
 const { generateErrorObject } = require('./error')
 
 /**
@@ -43,11 +43,14 @@ async function listOrganisations (token) {
 }
 
 exports.handler = async (event, context) => {
-  const githubToken = event.headers[constants.headerGithubToken] || '';
-  if (!githubToken) {
+  const headerGithubToken = findHeaderKey(event.headers, constants.headerGithubToken);
+  if (!headerGithubToken) {
     return generateErrorObject(`${constants.headerGithubToken} header is missing`)
   }
-
+  const githubToken = event.headers[headerGithubToken] || '';
+  if (!githubToken) {
+    return generateErrorObject(`${constants.headerGithubToken} value not set`)
+  }
   let organisations
   try {
     organisations = await listOrganisations(githubToken)
@@ -62,7 +65,8 @@ exports.handler = async (event, context) => {
   return {
     statusCode: 200,
     headers: {
-      'Content-Type': 'application/json'
+      ...constants.commonResponseHeaders,
+      ...constants.corsHeaders
     },
     body: JSON.stringify(organisations)
   }

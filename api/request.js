@@ -1,6 +1,14 @@
 const https = require('https')
 const { constants } = require('./constants')
 
+/**
+ * Header keys are lowercase in production but uppercase when running locally
+ * @param {object} headers
+ * @param {string} key
+ * @returns {string}
+ */
+exports.findHeaderKey = (headers, key) => Object.keys(headers).find(k => k.toLowerCase() === key.toLowerCase());
+
 exports.asyncHttpsRequest = async function asyncHttpsRequest (url, method, headers = {}) {
   return new Promise(function (resolve, reject) {
     https.request({

@@ -33,9 +33,13 @@ async function listRepositories (token, orgName) {
 }
 
 exports.handler = async (event, context) => {
-  const githubToken = event.headers[constants.headerGithubToken] || '';
-  if (!githubToken) {
+  const headerGithubToken = findHeaderKey(event.headers, constants.headerGithubToken);
+  if (!headerGithubToken) {
     return generateErrorObject(`${constants.headerGithubToken} header is missing`)
+  }
+  const githubToken = event.headers[headerGithubToken] || '';
+  if (!githubToken) {
+    return generateErrorObject(`${constants.headerGithubToken} value not set`)
   }
   const organisation = (event.queryStringParameters && event.queryStringParameters.organisation) || '';
   if (!organisation) {
@@ -57,7 +61,8 @@ exports.handler = async (event, context) => {
   return {
     statusCode: 200,
     headers: {
-      'Content-Type': 'application/json'
+      ...constants.commonResponseHeaders,
+      ...constants.corsHeaders
     },
     body: JSON.stringify(repos)
   }
