@@ -1,5 +1,5 @@
 const { constants } = require('./constants')
-const { asyncHttpsRequest } = require('./request')
+const { asyncHttpsRequest, findHeaderKey } = require('./request')
 const { generateErrorObject } = require('./error')
 
 /**
