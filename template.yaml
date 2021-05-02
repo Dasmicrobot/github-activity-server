@@ -80,6 +80,9 @@ Resources:
               - method.request.querystring.organisation:
                   Required: true
                   Caching: false
+              - method.request.querystring.pushedWithinDays:
+                  Required: false
+                  Caching: false
   ApiOrganisationsFunction:
     Type: AWS::Serverless::Function
     Properties:

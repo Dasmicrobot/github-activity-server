@@ -22,7 +22,7 @@ Production url: https://api.app.gitactivity.com
 | Path | Headers | Query params |
 | ---- | ------- | ------------ |
 | `/github/organisations` | `X-Github-Token` (required) | |
-| `/github/repositories` | `X-Github-Token` (required) | `organisation` (required) |
+| `/github/repositories` | `X-Github-Token` (required) | `organisation` (required), `pushedWithinDays` |
 
 ## Local development
 
