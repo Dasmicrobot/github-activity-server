@@ -62,42 +62,6 @@ Resources:
           CLIENT_ID: !Ref GithubClientId
           CLIENT_SECRET: !Ref GithubClientSecret
           OAUTH_CALLBACK_URL: !Ref GithubOauthCallbackUrl
-  ApiRepositoriesFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: api/
-      Handler: repositories.handler
-      Events:
-        Gateway:
-          Type: Api
-          Properties:
-            Path: /github/repositories
-            Method: get
-            RequestParameters:
-              - method.request.header.X-Github-Token:
-                  Required: true
-                  Caching: false
-              - method.request.querystring.organisation:
-                  Required: true
-                  Caching: false
-              - method.request.querystring.pushedWithinDays:
-                  Required: false
-                  Caching: false
-  ApiOrganisationsFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: api/
-      Handler: organisations.handler
-      Events:
-        Gateway:
-          Type: Api
-          Properties:
-            Path: /github/organisations
-            Method: get
-            RequestParameters:
-              - method.request.header.X-Github-Token:
-                  Required: true
-                  Caching: false
 
 Outputs:
   # here /Prod refers to implicitly created Prod stage
