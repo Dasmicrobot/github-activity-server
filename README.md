@@ -19,10 +19,10 @@
 
 Production url: https://api.app.gitactivity.com
 
-| Path | Headers | Query params |
-| ---- | ------- | ------------ |
-| `/github/organisations` | `X-Github-Token` (required) | |
-| `/github/repositories` | `X-Github-Token` (required) | `organisation` (required), `pushedWithinDays` |
+| Path | Headers | Query params | Comment |
+| ---- | ------- | ------------ | ------- |
+| `/oauth/github/login` | - | - | Begin Github authentication sequence |
+| `/oauth/github/login/callback` | - | `code` (required) | Github authentication callback, will redirect to client if successfully accepted |
 
 ## Local development
 
